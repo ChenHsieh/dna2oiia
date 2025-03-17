@@ -9,7 +9,7 @@ readme = "README.md"
 packages = [{ include = "dna2oiia", from = "src" }]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4.0"
+python = ">=3.8,<4.0"
 pydub = "*"
 numpy = "*"
 
