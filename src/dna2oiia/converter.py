@@ -1,6 +1,7 @@
 from pydub import AudioSegment
 import importlib.resources
-import pkg_resources
+import os
+
 def process_fasta(fasta_file):
     """Reads a FASTA file and extracts multiple DNA sequences."""
     sequences = {}
@@ -24,37 +25,45 @@ def process_fasta(fasta_file):
 
     return sequences
 
-
+# Load oiia.wav from the installed package
 def get_oiia_audio():
-    audio_path = pkg_resources.resource_filename("dna2oiia.data", "oiia.wav")
-    return AudioSegment.from_wav(audio_path)
+    with importlib.resources.path("dna2oiia.data", "oiia.wav") as audio_path:
+        return AudioSegment.from_wav(str(audio_path))
+
 # Define slicing positions (manual or using silence detection)
 DNA_TO_SOUND = {}
 
-def dna_to_oiia(dna_sequences, output_prefix="dna_oiia"):
+def dna_to_oiia(dna_sequences, output_prefix=None):
     """
     Convert DNA sequences to 'oiia' sound sequences.
 
     Parameters:
     dna_sequences (dict): A dictionary mapping sequence headers to DNA sequences.
-    output_prefix (str): Prefix for the output WAV files.
+    output_prefix (str, optional): Prefix for the output WAV files. If None, defaults are used.
     """
     # Lazy-load oiia_audio
     if not DNA_TO_SOUND:
         oiia_audio = get_oiia_audio()
         DNA_TO_SOUND.update({
-            "A": oiia_audio[1600:1742], # "o"
-            "T": oiia_audio[1793:1895], # "i"
+            "A": oiia_audio[1600:1742],    # "o"
+            "T": oiia_audio[1793:1895], # "ii"
             "C": oiia_audio[2003:2211], # "a"
             "G": oiia_audio[2220:2303]  # "e"
         })
 
+    multiple_sequences = len(dna_sequences) > 1
+    
     for header, dna_sequence in dna_sequences.items():
         tones = [DNA_TO_SOUND[base] for base in dna_sequence.upper() if base in DNA_TO_SOUND]
 
         if tones:
+            output_file = output_prefix if output_prefix else "dna_oiia"
+            if multiple_sequences:
+                output_file = f"{output_file}_{header}.wav"
+            else:
+                output_file = f"{output_file}.wav"
+            
             output_sound = sum(tones)
-            output_file = f"{output_prefix}_{header}.wav"
             output_sound.export(output_file, format="wav")
             print(f"Audio saved as {output_file}")
         else:

@@ -7,30 +7,25 @@ def main():
     
     input_group = parser.add_mutually_exclusive_group(required=True)
     input_group.add_argument("-s", "--string", type=str, help="DNA sequence to convert")
-    input_group.add_argument("-f", "--file", type=str, help="Path to a FASTA file containing the DNA sequence")
+    input_group.add_argument("-f", "--file", type=str, help="Path to a FASTA file containing one or more DNA sequences")
 
-    parser.add_argument("-o", "--output", type=str, default="output.wav", help="Output audio file name or prefix for multiple sequences")
+    parser.add_argument("-o", "--output", type=str, default=None, help="Output audio file name (optional). If multiple sequences in FASTA, filenames will include headers as suffixes.")
 
     args = parser.parse_args()
 
-    # Handle DNA sequence directly
     if args.string:
-        dna_sequences = {"single_sequence": args.string.upper()}  # Wrap string input in a dictionary
-        print(f"Processing DNA sequence: {args.string.upper()}")
-
-    # Handle FASTA file input
+        dna_sequences = {"sequence": args.string.upper()}  # Single sequence case
+        output_name = args.output if args.output else "dna_oiia.wav"
+    
     elif args.file:
         if not os.path.isfile(args.file):
             print(f"Error: File '{args.file}' not found!")
             exit(1)
         dna_sequences = process_fasta(args.file)
-        print(f"Loaded {len(dna_sequences)} sequences from {args.file}")
-
+        output_name = args.output  # If None, handled inside dna_to_oiia
+    
     # Convert to Oiia sound
-    for header, sequence in dna_sequences.items():
-        output_file = f"{args.output}_{header}.wav" if len(dna_sequences) > 1 else args.output
-        dna_to_oiia(sequence, output_file)
-        print(f"Generated sound file: {output_file}")
+    dna_to_oiia(dna_sequences, output_name)
 
 if __name__ == "__main__":
     main()

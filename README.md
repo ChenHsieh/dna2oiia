@@ -1,43 +1,55 @@
-# 🎵 DNA2oiia 🎵
+# DNA2oiia 🧬🎵🐱
  
- **DNA2oiia** is a fun Python package that converts DNA sequences into sound, specifically using the "oiia" meme-inspired phonetics. It extracts phonetic sounds from an audio file (`oiia.wav`) and maps them to DNA bases (`A`, `T`, `C`, `G`), generating a unique auditory representation of genetic sequences.
- 
+**DNA2oiia** is a Python package that converts DNA sequences into sound using the "oiia" phonetics. It supports both command-line interface (CLI) and Python API usage, handling DNA input as either raw sequences or FASTA files with single or multiple sequences.
+
 ## 🚀 Getting started
 
 ### 📥 Installation
  ```bash
  pip install git+https://github.com/ChenHsieh/DNA2oiia.git
  ```
- 
 ## 🛠️ CLI Usage
 
+### Convert a DNA Sequence Directly
+
 ```bash
-# Convert a DNA Sequence Directly:
-dna2oiia -s ATCGGATTA -o my_dna.wav
-# Convert a FASTA File:
-dna2oiia -f example.fasta -o fasta_output.wav
-
+dna2oiia -s ATCGGATTA -o my_dna
 ```
-	•	Use -s or --string to pass a DNA sequence.
-	•	Use -f or --file to provide a FASTA file path.
-	•	The -o or --output flag specifies the output audio file (default: output.wav).
 
-### python API
+- Use `-s` or `--string` to pass a DNA sequence.
+- The `-o` or `--output` flag specifies the output file name (default: `dna_oiia.wav`).
 
- ```python
- from dna2oiia.converter import dna_to_oiia
- 
- # Convert a DNA sequence into sound
- dna_to_oiia("ATCGGATTA", output_file="output.wav")
- ```
- 
- To process a FASTA file:
- ```python
- from dna2oiia.converter import process_fasta
- 
- dna_seq = process_fasta("example.fasta")
- dna_to_oiia(dna_seq, output_file="output.wav")
- ```
+### Convert a FASTA File
+
+```bash
+dna2oiia -f example.fasta -o fasta_output
+```
+
+- Use `-f` or `--file` to provide a FASTA file.
+- If the file contains **multiple sequences**, output files will be named:  
+  - `fasta_output_sequence1.wav`
+  - `fasta_output_sequence2.wav`
+  - ...
+- If `-o` is **not specified**, the default prefix is `dna_oiia`, so files will be named:
+  - `dna_oiia_sequence1.wav`
+  - `dna_oiia_sequence2.wav`
+
+## 🧑‍💻 Python API Usage
+
+You can also use `dna2oiia` as a Python library:
+
+### Convert a Single Sequence
+```python
+from dna2oiia.converter import dna_to_oiia
+dna_to_oiia({"example": "ATCGGATTA"}, "output.wav")
+```
+
+### Convert a FASTA File with Multiple Sequences
+```python
+from dna2oiia.converter import dna_to_oiia, process_fasta
+sequences = process_fasta("example.fasta")
+dna_to_oiia(sequences, "output")  # Generates output_sequence1.wav, output_sequence2.wav...
+```
  
 ## 🎶 Audio Source Attribution
 
