@@ -5,9 +5,10 @@
 ## 🚀 Getting started
 
 ### 📥 Installation
- ```bash
- pip install git+https://github.com/ChenHsieh/DNA2oiia.git
- ```
+```bash
+pip install git+https://github.com/ChenHsieh/DNA2oiia.git
+```
+
 ## 🛠️ CLI Usage
 
 ### Convert a DNA Sequence Directly
@@ -53,7 +54,7 @@ dna_to_oiia(sequences, "output")  # Generates output_sequence1.wav, output_seque
  
 ## 🎶 Audio Source Attribution
 
-The **"Oiia"** sound used in this project was sourced from the following YouTube video:
+The **"oiia"** sound used in this project was sourced from the following YouTube video:
 
 [🔗 Original Video on YouTube](https://www.youtube.com/watch?v=1oKZFGLn02g)
 
