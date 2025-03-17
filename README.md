@@ -1,6 +1,6 @@
  # 🎵 DNA2oiia 🎵
  
- **DNA2oiia** is a fun and creative Python package that converts DNA sequences into sound, specifically using the "oiia" meme-inspired phonetics. It extracts phonetic sounds from an audio file (`oiia.wav`) and maps them to DNA bases (`A`, `T`, `C`, `G`), generating a unique auditory representation of genetic sequences.
+ **DNA2oiia** is a fun Python package that converts DNA sequences into sound, specifically using the "oiia" meme-inspired phonetics. It extracts phonetic sounds from an audio file (`oiia.wav`) and maps them to DNA bases (`A`, `T`, `C`, `G`), generating a unique auditory representation of genetic sequences.
  
  ## 🚀 Features
  - 🎼 Converts DNA sequences (`ATCG`) into audio using predefined phonetic sounds.
