@@ -1,0 +1,39 @@
+[project]
+name = "dna2oiia"
+version = "0.1.0"
+description = "A Python package that converts DNA sequences into 'oiia' sounds."
+authors = [
+    {name = "Chen Hsieh",email = "chen.hsieh@uga.edu"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydub (>=0.25.1,<0.26.0)",
+    "numpy (>=2.2.4,<3.0.0)",
+    "ffmpeg (>=1.4,<2.0)"
+]
+
+[tool.poetry]
+name = "dna2oiia"
+version = "0.1.0"
+description = "A Python package that converts DNA sequences into 'oiia' sounds."
+authors = [
+    {name = "Chen Hsieh",email = "chen.hsieh@uga.edu"}
+]
+readme = "README.md"
+packages = [{ include = "dna2oiia", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydub = "*"
+numpy = "*"
+
+[tool.poetry.scripts]
+dna2oiia = "dna2oiia.cli:main"
+
+[tool.setuptools.package-data]
+"dna2oiia" = ["data/*.wav"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
