@@ -1,39 +1,20 @@
- # 🎵 DNA2oiia 🎵
+# 🎵 DNA2oiia 🎵
  
  **DNA2oiia** is a fun Python package that converts DNA sequences into sound, specifically using the "oiia" meme-inspired phonetics. It extracts phonetic sounds from an audio file (`oiia.wav`) and maps them to DNA bases (`A`, `T`, `C`, `G`), generating a unique auditory representation of genetic sequences.
  
- ## 🚀 Features
- - 🎼 Converts DNA sequences (`ATCG`) into audio using predefined phonetic sounds.
- - 📂 Supports input as strings or FASTA files.
- - 🔊 Uses real audio clips instead of synthetic sine waves.
- - 🛠️ Built with `pydub` and `ffmpeg` for audio processing.
- 
- ## 📥 Installation
- First, install the package using `poetry`:
- 
- ```bash
- poetry add dna2oiia
- ```
- 
- Or install directly from GitHub (if not yet published on PyPI):
- 
- ```bash
- git clone https://github.com/yourusername/DNA2oiia.git
- cd DNA2oiia
- poetry install
- ```
- 
-## 🛠️ Usage
+## 🚀 Getting started
 
-### Convert a DNA Sequence Directly:
+### 📥 Installation
+ ```bash
+ pip install git+https://github.com/ChenHsieh/DNA2oiia.git
+ ```
+ 
+## 🛠️ CLI Usage
 
 ```bash
+# Convert a DNA Sequence Directly:
 dna2oiia -s ATCGGATTA -o my_dna.wav
-```
-
-### Convert a FASTA File:
-
-```bash
+# Convert a FASTA File:
 dna2oiia -f example.fasta -o fasta_output.wav
 
 ```
@@ -58,22 +39,21 @@ dna2oiia -f example.fasta -o fasta_output.wav
  dna_to_oiia(dna_seq, output_file="output.wav")
  ```
  
- ## 🧪 Running Tests
- Run unit tests using `pytest`:
+## 🎶 Audio Source Attribution
+
+The **"Oiia"** sound used in this project was sourced from the following YouTube video:
+
+[🔗 Original Video on YouTube](https://www.youtube.com/watch?v=1oKZFGLn02g)
+
+The meme itself originates from viral internet content. This project does not claim ownership of the original meme audio but uses it under **fair use** for creative and educational purposes.
  
- ```bash
- pytest tests/
- ```
- 
- ## 🏗️ Next Steps
- - 🎤 **Tune Audio Processing**: Improve phoneme slicing to make the generated audio more natural.
- - 🌍 **Web Interface**: Build a simple web app (Streamlit) allowing users to input DNA and hear their sequence.
+ ## TODO
+ - 🌍 **Web Interface**: Build a simple web app (Streamlit or Flet) allowing users to input DNA and hear their sequence.
  - 📦 **PyPI Release**: Finalize documentation and publish to PyPI.
- - 🏆 **Community Engagement**: Create social media content and challenges for users to submit their DNA sounds.
- 
+
  ## 🤖 AI Assistance
   
- This project was developed with assistance from ChatGPT to brainstorm ideas, improve code structure, refine documentation, and troubleshoot issues. ChatGPT was used as a tool to enhance productivity and streamline the development process.
+ This project was developed with assistance from ChatGPT to improve code structure, refine documentation, and troubleshoot issues. ChatGPT was used as a tool to enhance productivity and streamline the development process.
  
  ## 📜 License
  This project is licensed under the MIT License.

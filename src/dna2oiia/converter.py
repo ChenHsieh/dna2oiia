@@ -2,11 +2,27 @@ from pydub import AudioSegment
 import importlib.resources
 
 def process_fasta(fasta_file):
-    """Reads a FASTA file and extracts the DNA sequence."""
+    """Reads a FASTA file and extracts multiple DNA sequences."""
+    sequences = {}
+    current_header = None
+    current_sequence = []
+
     with open(fasta_file, "r") as f:
-        lines = f.readlines()
-    dna_sequence = "".join(line.strip() for line in lines if not line.startswith(">"))
-    return dna_sequence
+        for line in f:
+            line = line.strip()
+            if line.startswith(">"):
+                if current_header:
+                    sequences[current_header] = "".join(current_sequence)
+                current_header = line[1:]  # Remove ">" from header
+                current_sequence = []
+            else:
+                current_sequence.append(line)
+
+        # Add the last sequence
+        if current_header:
+            sequences[current_header] = "".join(current_sequence)
+
+    return sequences
 
 # Load oiia.wav from the installed package
 def get_oiia_audio():
@@ -16,16 +32,14 @@ def get_oiia_audio():
 # Define slicing positions (manual or using silence detection)
 DNA_TO_SOUND = {}
 
-def dna_to_oiia(dna_sequence, output_file="dna_oiia.wav"):
+def dna_to_oiia(dna_sequences, output_prefix="dna_oiia"):
     """
-    Convert DNA sequence to an 'oiia' sound sequence.
+    Convert DNA sequences to 'oiia' sound sequences.
 
     Parameters:
-    dna_sequence (str): A string representing the DNA sequence (e.g., "AATTCCGG").
-    output_file (str): The name of the output WAV file. Default is "dna_oiia.wav".
+    dna_sequences (dict): A dictionary mapping sequence headers to DNA sequences.
+    output_prefix (str): Prefix for the output WAV files.
     """
-    tones = []
-
     # Lazy-load oiia_audio
     if not DNA_TO_SOUND:
         oiia_audio = get_oiia_audio()
@@ -36,20 +50,19 @@ def dna_to_oiia(dna_sequence, output_file="dna_oiia.wav"):
             "G": oiia_audio[2220:2303]  # "e"
         })
 
+    for header, dna_sequence in dna_sequences.items():
+        tones = [DNA_TO_SOUND[base] for base in dna_sequence.upper() if base in DNA_TO_SOUND]
 
-    for base in dna_sequence.upper():
-        if base in DNA_TO_SOUND:
-            tones.append(DNA_TO_SOUND[base])
-
-    # Combine tones into a single audio file
-    if tones:
-        output_sound = sum(tones)
-        output_sound.export(output_file, format="wav")
-        print(f"Audio saved as {output_file}")
-    else:
-        print("No valid DNA sequence found!")
+        if tones:
+            output_sound = sum(tones)
+            output_file = f"{output_prefix}_{header}.wav"
+            output_sound.export(output_file, format="wav")
+            print(f"Audio saved as {output_file}")
+        else:
+            print(f"No valid DNA sequence found for {header}!")
 
 # Example usage
 if __name__ == "__main__":
-    test_dna = "aattccgg"
-    dna_to_oiia(test_dna)
+    test_fasta = "example.fasta"
+    sequences = process_fasta(test_fasta)
+    dna_to_oiia(sequences)
