@@ -2,6 +2,15 @@
  
 **DNA2oiia** is a Python package that converts DNA sequences into sound using the "oiia" phonetics. It supports both command-line interface (CLI) and Python API usage, handling DNA input as either raw sequences or FASTA files with single or multiple sequences.
 
+<div>
+    <a href="https://www.loom.com/share/3b2a442c1ba44cdfab7ba84e45e95abc">
+      <p>dna2oiia - demo v1 - Watch Video</p>
+    </a>
+    <a href="https://www.loom.com/share/3b2a442c1ba44cdfab7ba84e45e95abc">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/3b2a442c1ba44cdfab7ba84e45e95abc-4d62138c358b16be-full-play.gif">
+    </a>
+</div>
+
 ## 🚀 Getting started
 
 ### 📥 Installation
