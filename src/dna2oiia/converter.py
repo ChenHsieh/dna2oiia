@@ -1,6 +1,6 @@
 from pydub import AudioSegment
 import importlib.resources
-
+import pkg_resources
 def process_fasta(fasta_file):
     """Reads a FASTA file and extracts multiple DNA sequences."""
     sequences = {}
@@ -24,11 +24,10 @@ def process_fasta(fasta_file):
 
     return sequences
 
-# Load oiia.wav from the installed package
-def get_oiia_audio():
-    with importlib.resources.path("dna2oiia.data", "oiia.wav") as audio_path:
-        return AudioSegment.from_wav(str(audio_path))
 
+def get_oiia_audio():
+    audio_path = pkg_resources.resource_filename("dna2oiia.data", "oiia.wav")
+    return AudioSegment.from_wav(audio_path)
 # Define slicing positions (manual or using silence detection)
 DNA_TO_SOUND = {}
 
@@ -44,8 +43,8 @@ def dna_to_oiia(dna_sequences, output_prefix="dna_oiia"):
     if not DNA_TO_SOUND:
         oiia_audio = get_oiia_audio()
         DNA_TO_SOUND.update({
-            "A": oiia_audio[1600:1742],    # "o"
-            "T": oiia_audio[1793:1895], # "ii"
+            "A": oiia_audio[1600:1742], # "o"
+            "T": oiia_audio[1793:1895], # "i"
             "C": oiia_audio[2003:2211], # "a"
             "G": oiia_audio[2220:2303]  # "e"
         })
