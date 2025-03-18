@@ -1,5 +1,6 @@
 import argparse
 import os
+import io
 from dna2oiia.converter import dna_to_oiia, process_fasta
 
 def main():
@@ -11,6 +12,7 @@ def main():
 
     parser.add_argument("-o", "--output", type=str, default=None, help="Output audio file name (optional). If multiple sequences in FASTA, filenames will include headers as suffixes.")
     parser.add_argument("--format", type=str, choices=["wav", "mp3"], default="wav", help="Output audio format (wav or mp3)")
+    parser.add_argument("--stream", action="store_true", help="Stream the audio output instead of saving to a file")
 
     args = parser.parse_args()
 
@@ -25,8 +27,12 @@ def main():
         dna_sequences = process_fasta(args.file)
         output_name = args.output  # If None, handled inside dna_to_oiia
     
-    # Convert to Oiia sound
-    dna_to_oiia(dna_sequences, output_name, args.format)
+    if args.stream:
+        output_buffer = io.BytesIO()
+        dna_to_oiia(dna_sequences, output_prefix=None, output_buffer=output_buffer, output_format=args.format)
+        print("Audio streamed successfully.")
+    else:
+        dna_to_oiia(dna_sequences, output_name, output_format=args.format)
 
 if __name__ == "__main__":
     main()

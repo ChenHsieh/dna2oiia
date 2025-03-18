@@ -1,5 +1,5 @@
 # DNA2oiia 🧬🎵🐱
- 
+
 **DNA2oiia** is a Python package that converts DNA sequences into sound using the "oiia" phonetics. It supports both command-line interface (CLI) and Python API usage, handling DNA input as either raw sequences or FASTA files with single or multiple sequences.
 
 <div>
@@ -47,6 +47,16 @@ dna2oiia -f example.fasta -o fasta_output --format mp3
   - `dna_oiia_sequence1.mp3`
   - `dna_oiia_sequence2.mp3`
 
+### 🔥 **Streaming Mode (No File Creation)**
+You can stream the output audio directly instead of saving it to a file:
+
+```bash
+dna2oiia -s ATCGGATTA --stream --format wav
+```
+
+- The `--stream` flag outputs audio as an in-memory stream instead of writing to disk.
+- Useful for real-time applications and integration with web services.
+
 ## 🧑‍💻 Python API Usage
 
 You can also use `dna2oiia` as a Python library:
@@ -60,10 +70,23 @@ dna_to_oiia({"example": "ATCGGATTA"}, "output")
 ### Convert a FASTA File with Multiple Sequences
 ```python
 from dna2oiia.converter import dna_to_oiia, process_fasta
+
 sequences = process_fasta("example.fasta")
 dna_to_oiia(sequences, "output")  # Generates output_sequence1.wav, output_sequence2.wav...
 ```
- 
+
+### Stream Audio Directly (No File Creation)
+```python
+import io
+from dna2oiia.converter import dna_to_oiia
+
+output_buffer = io.BytesIO()
+dna_to_oiia({"example": "ATCGGATTA"}, output_buffer)
+output_buffer.seek(0)  # Ensure proper streaming
+
+# Use output_buffer for real-time playback or streaming in web apps
+```
+
 ## 🎶 Audio Source Attribution
 
 The **"oiia"** sound used in this project was sourced from the following YouTube video:

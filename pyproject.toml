@@ -12,6 +12,7 @@ packages = [{ include = "dna2oiia", from = "src" }]
 python = ">=3.10,<4.0"
 pydub = "*"
 numpy = ">=1.24,<3.0"
+streamlit = "^1.43.2"
 
 [tool.poetry.scripts]
 dna2oiia = "dna2oiia.cli:main"

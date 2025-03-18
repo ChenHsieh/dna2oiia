@@ -1,6 +1,7 @@
 from pydub import AudioSegment
 import importlib.resources
 import os
+import io
 
 def process_fasta(fasta_file):
     """Reads a FASTA file and extracts multiple DNA sequences."""
@@ -33,13 +34,14 @@ def get_oiia_audio():
 # Define slicing positions (manual or using silence detection)
 DNA_TO_SOUND = {}
 
-def dna_to_oiia(dna_sequences, output_prefix=None, output_format="wav"):
+def dna_to_oiia(dna_sequences, output_prefix=None, output_buffer=None, output_format="wav"):
     """
     Convert DNA sequences to 'oiia' sound sequences.
 
     Parameters:
     dna_sequences (dict): A dictionary mapping sequence headers to DNA sequences.
     output_prefix (str, optional): Prefix for the output audio files. If None, defaults are used.
+    output_buffer (io.BytesIO, optional): If provided, writes output to a buffer instead of a file.
     output_format (str): The format of the output audio files (wav or mp3).
     """
     # Lazy-load oiia_audio
@@ -58,15 +60,19 @@ def dna_to_oiia(dna_sequences, output_prefix=None, output_format="wav"):
         tones = [DNA_TO_SOUND[base] for base in dna_sequence.upper() if base in DNA_TO_SOUND]
 
         if tones:
-            output_file = output_prefix if output_prefix else "dna_oiia"
-            if multiple_sequences:
-                output_file = f"{output_file}_{header}.{output_format}"
-            else:
-                output_file = f"{output_file}.{output_format}"
-            
             output_sound = sum(tones)
-            output_sound.export(output_file, format=output_format)
-            print(f"Audio saved as {output_file}")
+            
+            if output_buffer:
+                output_sound.export(output_buffer, format=output_format)
+                output_buffer.seek(0)  # Ensure stream starts at beginning
+            else:
+                output_file = output_prefix if output_prefix else "dna_oiia"
+                if multiple_sequences:
+                    output_file = f"{output_file}_{header}.{output_format}"
+                else:
+                    output_file = f"{output_file}.{output_format}"
+                output_sound.export(output_file, format=output_format)
+                print(f"Audio saved as {output_file}")
         else:
             print(f"No valid DNA sequence found for {header}!")
 
