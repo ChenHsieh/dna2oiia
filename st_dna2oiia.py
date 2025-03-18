@@ -2,6 +2,13 @@ import streamlit as st
 import io
 from pydub import AudioSegment
 from dna2oiia.converter import dna_to_oiia
+st.set_page_config(
+    page_title="DNA2oiia",
+    page_icon="🧬",
+    menu_items={
+        'Hi you found me': 'https://chenhsieh.com',
+    }
+)
 
 def is_valid_dna(sequence):
     return all(base in "ATCG" for base in sequence.upper())
@@ -18,7 +25,7 @@ def main():
     """,
     unsafe_allow_html=True
     )
-    st.title("🧬🎵🐱 DNA2Oiia - Convert DNA Sequences to Sound")
+    st.title("🧬🎵🐱 DNA2oiia - Convert DNA Sequences to Sound")
     
     # Text input for DNA sequence
     dna_sequence = st.text_area("Enter a DNA sequence (only A, T, C, G allowed):", "ATTCGATGTCGCTCGCT")

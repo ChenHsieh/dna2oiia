@@ -2,14 +2,7 @@
 
 **DNA2oiia** is a Python package that converts DNA sequences into sound using the "oiia" phonetics. It supports both command-line interface (CLI) and Python API usage, handling DNA input as either raw sequences or FASTA files with single or multiple sequences.
 
-<div>
-    <a href="https://www.loom.com/share/3b2a442c1ba44cdfab7ba84e45e95abc">
-      <p>dna2oiia - demo v1 - Watch Video</p>
-    </a>
-    <a href="https://www.loom.com/share/3b2a442c1ba44cdfab7ba84e45e95abc">
-      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/3b2a442c1ba44cdfab7ba84e45e95abc-4d62138c358b16be-full-play.gif">
-    </a>
-</div>
+![DNA2Oiia Demo](demo.gif)
 
 ## 🚀 Getting started
 
@@ -108,6 +101,10 @@ This will open the web app in your default browser, where you can:
  - Upload a FASTA file and process multiple sequences.
  - Stream and download the generated audio files.
 
+## 🎉 Acknowledgments
+
+This project was inspired by a conversation with my IOB friends Nathan and Ibukun during a hackathon trip. Their creative thinking sparked the idea of transforming DNA sequences into sound. Huge thanks for the inspiration!
+
 ## 🎶 Audio Source Attribution
 
 The **"oiia"** sound used in this project was sourced from the following YouTube video:
@@ -117,7 +114,7 @@ The **"oiia"** sound used in this project was sourced from the following YouTube
 The meme itself originates from viral internet content. This project does not claim ownership of the original meme audio but uses it under **fair use** for creative and educational purposes.
  
  ## TODO
- - 🌍 **Web Interface**: Build a simple web app (Streamlit or Flet) allowing users to input DNA and hear their sequence.
+ - 🌍 **Web Interface**: Refine the web app (Streamlit or Flet) user interface.
  - 📦 **PyPI Release**: Finalize documentation and publish to PyPI.
 
  ## 🤖 AI Assistance
