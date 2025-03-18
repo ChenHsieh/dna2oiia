@@ -16,6 +16,8 @@
 ### 📥 Installation
 ```bash
 pip install git+https://github.com/ChenHsieh/DNA2oiia.git
+# or
+pipx install git+https://github.com/ChenHsieh/DNA2oiia.git
 ```
 
 ## 🛠️ CLI Usage
@@ -27,7 +29,7 @@ dna2oiia -s ATCGGATTA -o my_dna
 ```
 
 - Use `-s` or `--string` to pass a DNA sequence.
-- The `-o` or `--output` flag specifies the output file name (default: `dna_oiia.wav`).
+- The `-o` or `--output` flag specifies the output file name (default: `dna2oiia`).
 
 ### Convert a FASTA File
 
@@ -40,7 +42,7 @@ dna2oiia -f example.fasta -o fasta_output
   - `fasta_output_sequence1.wav`
   - `fasta_output_sequence2.wav`
   - ...
-- If `-o` is **not specified**, the default prefix is `dna_oiia`, so files will be named:
+- If `-o` is **not specified**, the default prefix is `dna2oiia`, so files will be named:
   - `dna_oiia_sequence1.wav`
   - `dna_oiia_sequence2.wav`
 
@@ -51,7 +53,7 @@ You can also use `dna2oiia` as a Python library:
 ### Convert a Single Sequence
 ```python
 from dna2oiia.converter import dna_to_oiia
-dna_to_oiia({"example": "ATCGGATTA"}, "output.wav")
+dna_to_oiia({"example": "ATCGGATTA"}, "output")
 ```
 
 ### Convert a FASTA File with Multiple Sequences
