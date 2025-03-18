@@ -1,6 +1,10 @@
 .DS_Store
 __pycache__/
+*/__pycache__/*
 *.pyc
 *.wav
+*.mp3
 poetry.lock
 dist/
+src/dna2oiia/__pycache__/cli.cpython-312.pyc
+src/dna2oiia/__pycache__/converter.cpython-312.pyc
