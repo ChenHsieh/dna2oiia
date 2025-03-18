@@ -10,12 +10,13 @@ def main():
     input_group.add_argument("-f", "--file", type=str, help="Path to a FASTA file containing one or more DNA sequences")
 
     parser.add_argument("-o", "--output", type=str, default=None, help="Output audio file name (optional). If multiple sequences in FASTA, filenames will include headers as suffixes.")
+    parser.add_argument("--format", type=str, choices=["wav", "mp3"], default="wav", help="Output audio format (wav or mp3)")
 
     args = parser.parse_args()
 
     if args.string:
         dna_sequences = {"sequence": args.string.upper()}  # Single sequence case
-        output_name = args.output if args.output else "dna_oiia.wav"
+        output_name = args.output if args.output else "dna_oiia"
     
     elif args.file:
         if not os.path.isfile(args.file):
@@ -25,7 +26,7 @@ def main():
         output_name = args.output  # If None, handled inside dna_to_oiia
     
     # Convert to Oiia sound
-    dna_to_oiia(dna_sequences, output_name)
+    dna_to_oiia(dna_sequences, output_name, args.format)
 
 if __name__ == "__main__":
     main()

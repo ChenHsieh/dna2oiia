@@ -25,26 +25,27 @@ pipx install git+https://github.com/ChenHsieh/DNA2oiia.git
 ### Convert a DNA Sequence Directly
 
 ```bash
-dna2oiia -s ATCGGATTA -o my_dna
+dna2oiia -s ATCGGATTA -o my_dna --format mp3
 ```
 
 - Use `-s` or `--string` to pass a DNA sequence.
 - The `-o` or `--output` flag specifies the output file name (default: `dna2oiia`).
+- The `--format` flag specifies the output format (`wav` or `mp3`, default: `wav`).
 
 ### Convert a FASTA File
 
 ```bash
-dna2oiia -f example.fasta -o fasta_output
+dna2oiia -f example.fasta -o fasta_output --format mp3
 ```
 
 - Use `-f` or `--file` to provide a FASTA file.
 - If the file contains **multiple sequences**, output files will be named:  
-  - `fasta_output_sequence1.wav`
-  - `fasta_output_sequence2.wav`
+  - `fasta_output_sequence1.mp3`
+  - `fasta_output_sequence2.mp3`
   - ...
 - If `-o` is **not specified**, the default prefix is `dna2oiia`, so files will be named:
-  - `dna_oiia_sequence1.wav`
-  - `dna_oiia_sequence2.wav`
+  - `dna_oiia_sequence1.mp3`
+  - `dna_oiia_sequence2.mp3`
 
 ## 🧑‍💻 Python API Usage
 

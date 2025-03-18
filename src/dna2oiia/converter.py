@@ -33,13 +33,14 @@ def get_oiia_audio():
 # Define slicing positions (manual or using silence detection)
 DNA_TO_SOUND = {}
 
-def dna_to_oiia(dna_sequences, output_prefix=None):
+def dna_to_oiia(dna_sequences, output_prefix=None, output_format="wav"):
     """
     Convert DNA sequences to 'oiia' sound sequences.
 
     Parameters:
     dna_sequences (dict): A dictionary mapping sequence headers to DNA sequences.
-    output_prefix (str, optional): Prefix for the output WAV files. If None, defaults are used.
+    output_prefix (str, optional): Prefix for the output audio files. If None, defaults are used.
+    output_format (str): The format of the output audio files (wav or mp3).
     """
     # Lazy-load oiia_audio
     if not DNA_TO_SOUND:
@@ -59,12 +60,12 @@ def dna_to_oiia(dna_sequences, output_prefix=None):
         if tones:
             output_file = output_prefix if output_prefix else "dna_oiia"
             if multiple_sequences:
-                output_file = f"{output_file}_{header}.wav"
+                output_file = f"{output_file}_{header}.{output_format}"
             else:
-                output_file = f"{output_file}.wav"
+                output_file = f"{output_file}.{output_format}"
             
             output_sound = sum(tones)
-            output_sound.export(output_file, format="wav")
+            output_sound.export(output_file, format=output_format)
             print(f"Audio saved as {output_file}")
         else:
             print(f"No valid DNA sequence found for {header}!")
