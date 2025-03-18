@@ -5,9 +5,6 @@ from dna2oiia.converter import dna_to_oiia
 st.set_page_config(
     page_title="DNA2oiia",
     page_icon="🧬",
-    menu_items={
-        'Hi you found me': 'https://chenhsieh.com',
-    }
 )
 
 def is_valid_dna(sequence):
