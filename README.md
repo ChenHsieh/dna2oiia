@@ -87,6 +87,27 @@ output_buffer.seek(0)  # Ensure proper streaming
 # Use output_buffer for real-time playback or streaming in web apps
 ```
 
+## 🌐 Streamlit Web App
+
+You can run a **Streamlit web app** to interactively input DNA sequences and generate audio.
+
+### 🏗️ Install Streamlit
+If you haven't installed Streamlit yet, add it to your environment:
+```bash
+pip install streamlit
+```
+
+### 🚀 Run the Web App
+Navigate to the project directory and run:
+```bash
+streamlit run st_dna2oiia.py
+```
+
+This will open the web app in your default browser, where you can:
+ - Enter a DNA sequence and generate sound.
+ - Upload a FASTA file and process multiple sequences.
+ - Stream and download the generated audio files.
+
 ## 🎶 Audio Source Attribution
 
 The **"oiia"** sound used in this project was sourced from the following YouTube video:
